@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">1ml</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="welcome_to_1ml">Welcome to 1ML</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+</resources>
