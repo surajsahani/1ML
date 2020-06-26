@@ -33,7 +33,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        progressBar = findViewById(R.id.progressbar);
+        progressBar = findViewById(R.id.progressBar);
         editText = findViewById(R.id.editTextCode);
 
         String phonenumber = getIntent().getStringExtra("phonenumber");
