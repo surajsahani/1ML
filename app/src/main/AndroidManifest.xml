@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".VerifyPhoneActivity"/>
-            <activity android:name=".ProfileActivity">
+            <activity android:name=".ProfileActivity"/>
+            <activity android:name=".SignUpActivity">
             </activity>
     </application>
 </manifest>
