@@ -3,35 +3,56 @@ package com.example.a1ml;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
-
-        Handler handler;
-        ImageView img;
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-
-            img = findViewById(R.id.img);
-            img.animate().alpha(4000).setDuration(0);
-
-            handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
+public class MainActivity extends android.app.Activity {
 
 
-                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+    private EditText editText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editText = findViewById(R.id.editTextPhone);
+
+        findViewById(R.id.buttonGetOtp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String number = editText.getText().toString().trim();
+
+                if (number.isEmpty() || number.length() < 10) {
+                    editText.setError("Valid number is required");
+                    editText.requestFocus();
+                    return;
                 }
-            },4000);
-        }
+
+                String phoneNumber = "+"  + number;
+
+                Intent intent = new Intent(MainActivity.this, VerifyPhoneActivity.class);
+                intent.putExtra("phonenumber", phoneNumber);
+                startActivity(intent);
+
+            }
+        });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+            startActivity(intent);
+        }
+    }
+}
